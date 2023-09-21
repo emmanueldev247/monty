@@ -1,6 +1,5 @@
 #include "monty.h"
 
-
 /**
  * add - function to add the top two elements of the stack
  * @stack: structure for the stack
@@ -23,10 +22,24 @@ void add(stack_t **stack, unsigned int line_number)
 	temp = *stack;
 	*stack = (*stack)->next;
 
-    if (*stack)
+	if (*stack)
 		(*stack)->prev = NULL;
 
 	free(temp);
 
 	(*stack)->n = result;
+}
+
+
+
+/**
+ * nop - function for the nop opcode (does nothing)
+ * @stack: structure for the stack
+ * @line_number: line number
+ *
+ */
+void nop(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
 }

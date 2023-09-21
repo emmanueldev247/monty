@@ -41,7 +41,7 @@ void tokenize(char *line, unsigned int line_number)
 		else if (strcmp(token, "add") == 0)
 			add(&stack, line_number);
 		else if (strcmp(token, "nop") == 0)
-			continue;
+			nop(&stack, line_number);
 		else
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
