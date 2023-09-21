@@ -4,12 +4,11 @@
  * push - Function to push an element onto the stack or queue
  * @stack: structure for the stack
  * @value: value to push
- * @is_queue: is queue flag
  *
  */
-void push(stack_t **stack, int value, int is_queue)
+void push(stack_t **stack, int value)
 {
-	stack_t *last, *new_node;
+	stack_t *new_node;
 
 	new_node = malloc(sizeof(stack_t));
 	if (!new_node)
@@ -19,35 +18,13 @@ void push(stack_t **stack, int value, int is_queue)
 	}
 
 	new_node->n = value;
+	new_node->prev = NULL;
+	new_node->next = *stack;
 
-	if (is_queue)
-	{
-		new_node->prev = NULL;
-		new_node->next = NULL;
+	if (*stack)
+		(*stack)->prev = new_node;
 
-		if (*stack == NULL)
-			*stack = new_node;
-		else
-		{
-			last = *stack;
-
-			while (last->next)
-				last = last->next;
-
-			last->next = new_node;
-			new_node->prev = last;
-		}
-	}
-	else
-	{
-		new_node->prev = NULL;
-		new_node->next = *stack;
-
-		if (*stack)
-			(*stack)->prev = new_node;
-
-		*stack = new_node;
-	}
+	*stack = new_node;
 }
 
 
