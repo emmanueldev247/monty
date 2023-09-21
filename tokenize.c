@@ -1,5 +1,7 @@
 #include "monty.h"
 
+stack_t *stack = NULL;
+
 /**
  * tokenize - to tokenize the line of the source file
  * @line: line to tokenize
@@ -13,8 +15,15 @@ void tokenize(char *line, int line_number)
 	{
 		if (strcmp(token, "push") == 0)
 		{
-
-		} else if (strcmp(token, "pall") == 0)
+			token = strtok(NULL, " \t\n");
+			if (token == NULL)
+			{
+				fprintf(stderr, "L%d: usage: push integer\n", line_number);
+				exit(EXIT_FAILURE);
+			}
+			push(&stack, atoi(token), 0);
+		}
+		else if (strcmp(token, "pall") == 0)
 		{
 
 		} else
