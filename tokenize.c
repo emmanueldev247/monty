@@ -22,7 +22,6 @@ void tokenize(char *line, unsigned int line_number)
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
 				exit(EXIT_FAILURE);
 			}
-
 			value = strtol(token, &endptr, 10);
 			if (*endptr != '\0')
 			{
@@ -37,12 +36,13 @@ void tokenize(char *line, unsigned int line_number)
 			pint(&stack, line_number);
 		else if (strcmp(token, "pop") == 0)
 			pop(&stack, line_number);
+		else if (strcmp(token, "swap") == 0)
+			swap(&stack, line_number);
 		else
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
 			exit(EXIT_FAILURE);
 		}
-
 		token = strtok(NULL, " \t\n");
 	}
 }
