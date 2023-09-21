@@ -37,7 +37,7 @@ typedef struct instruction_s
 } instruction_t;
 
 
-void tokenize(char *line);
+void tokenize(char *line, int line_number);
 
 
 #endif

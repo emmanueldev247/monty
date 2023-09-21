@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 	while (fgets(line, sizeof(line), file) != NULL)
 	{
 		line_number++;
-		tokenize(line);
+		tokenize(line, line_number);
 	}
 
 	fclose(file);

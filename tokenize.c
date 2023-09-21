@@ -3,8 +3,9 @@
 /**
  * tokenize - to tokenize the line of the source file
  * @line: line to tokenize
+ * @line_number: line number
  */
-void tokenize(char *line)
+void tokenize(char *line, int line_number)
 {
 	char *token = strtok(line, " \t\n");
 
@@ -18,7 +19,7 @@ void tokenize(char *line)
 
 		} else
 		{
-			fprintf(stderr, "L<line_number>: unknown instruction %s\n", token);
+			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
 			exit(EXIT_FAILURE);
 		}
 
