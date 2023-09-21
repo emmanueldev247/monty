@@ -10,7 +10,7 @@ stack_t *stack = NULL;
 void tokenize(char *line, unsigned int line_number)
 {
 	int value;
-	char *token = strtok(line, " \t\n");
+	char *endptr, *token = strtok(line, " \t\n");
 
 	while (token != NULL)
 	{
@@ -22,12 +22,22 @@ void tokenize(char *line, unsigned int line_number)
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
 				exit(EXIT_FAILURE);
 			}
-			value = atoi(token);
-			if (value == 0 && strcmp(token, "0") != 0)
+
+			value = strtol(token, &endptr, 10);
+			if (*endptr != '\0')
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
 				exit(EXIT_FAILURE);
 			}
+
+			/**
+		*	value = atoi(token);
+		*	if (value == 0 && strcmp(token, "0") != 0)
+			{
+				fprintf(stderr, "L%d: usage: push integer\n", line_number);
+				exit(EXIT_FAILURE);
+			}
+			*/
 			push(&stack, value);
 		}
 		else if (strcmp(token, "pall") == 0)
