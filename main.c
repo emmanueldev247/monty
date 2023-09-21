@@ -1,5 +1,6 @@
 #include "monty.h"
 
+
 /**
  * main - Entry point
  * @argc: argument count
@@ -35,8 +36,5 @@ int main(int argc, char *argv[])
 
 	fclose(file);
 
-
-
 	return (0);
 }
-
