@@ -22,19 +22,16 @@ void tokenize(char *line, unsigned int line_number)
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
 				exit(EXIT_FAILURE);
 			}
-
 			value = atoi(token);
 			if (value == 0 && strcmp(token, "0") != 0)
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
 				exit(EXIT_FAILURE);
 			}
-
 			push(&stack, value);
 		}
 		else if (strcmp(token, "pall") == 0)
-		{
-
+			pall(&stack);
 		} else
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
