@@ -1,0 +1,84 @@
+#include "monty.h"
+
+stack_t *stack = NULL;
+
+/**
+ * tokenize - to tokenize the line of the source file
+ * @line: line to tokenize
+ * @line_number: line number
+ */
+void tokenize(char *line, unsigned int line_number)
+{
+	int value;
+	char *endptr, *token = strtok(line, " \t\n");
+
+	while (token != NULL)
+	{
+		if (strcmp(token, "push") == 0)
+		{
+			token = strtok(NULL, " \t\n");
+			if (token == NULL)
+			{
+				fprintf(stderr, "L%d: usage: push integer\n", line_number);
+				exit(EXIT_FAILURE);
+			}
+			value = strtol(token, &endptr, 10);
+			if (*endptr != '\0')
+			{
+				fprintf(stderr, "L%d: usage: push integer\n", line_number);
+				exit(EXIT_FAILURE);
+			}
+			push(&stack, value);
+		}
+		else
+			exec_opcodes(stack, token, line_number);
+		token = strtok(NULL, " \t\n");
+	}
+}
+
+
+/**
+ * exec_opcode - function to executr opcodes
+ * @stack: structure for the stack
+ * @line_number: line number
+ */
+void exec_opcodes(stack_t *stack, char * token, unsigned int line_number)
+{
+	if (strcmp(token, "pall") == 0)
+		pall(&stack);
+	else if (strcmp(token, "pint") == 0)
+		pint(&stack, line_number);
+	else if (strcmp(token, "pop") == 0)
+		pop(&stack, line_number);
+	else if (strcmp(token, "swap") == 0)
+		swap(&stack, line_number);
+	else if (strcmp(token, "add") == 0)
+		add(&stack, line_number);
+	else if (strcmp(token, "sub") == 0)
+		sub(&stack, line_number);
+	else if (strcmp(token, "nop") == 0)
+		nop(&stack, line_number);
+	else
+	{
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
+		exit(EXIT_FAILURE);
+	}
+}
+
+
+/**
+ * cleanup - frees the stack
+ */
+void cleanup(void)
+{
+	stack_t *temp;
+
+	temp = stack;
+
+	while (stack)
+	{
+		temp = stack;
+		stack = stack->next;
+		free(temp);
+	}
+}

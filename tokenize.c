@@ -18,19 +18,12 @@ void tokenize(char *line, unsigned int line_number)
 		{
 			token = strtok(NULL, " \t\n");
 			if (token == NULL)
-			{
-				fprintf(stderr, "L%d: usage: push integer\n", line_number);
-				exit(EXIT_FAILURE);
-			}
+				push_error(line_number);
 			value = strtol(token, &endptr, 10);
 			if (*endptr != '\0')
-			{
-				fprintf(stderr, "L%d: usage: push integer\n", line_number);
-				exit(EXIT_FAILURE);
-			}
+				push_error(line_number);
 			push(&stack, value);
-		}
-		else if (strcmp(token, "pall") == 0)
+		} else if (strcmp(token, "pall") == 0)
 			pall(&stack);
 		else if (strcmp(token, "pint") == 0)
 			pint(&stack, line_number);
@@ -40,6 +33,8 @@ void tokenize(char *line, unsigned int line_number)
 			swap(&stack, line_number);
 		else if (strcmp(token, "add") == 0)
 			add(&stack, line_number);
+		else if (strcmp(token, "sub") == 0)
+			sub(&stack, line_number);
 		else if (strcmp(token, "nop") == 0)
 			nop(&stack, line_number);
 		else
@@ -49,6 +44,16 @@ void tokenize(char *line, unsigned int line_number)
 		}
 		token = strtok(NULL, " \t\n");
 	}
+}
+
+/**
+ * push_error - function to print error for push opcode
+ * @line_number: error line number
+ */
+void push_error(unsigned int line_number)
+{
+	fprintf(stderr, "L%d: usage: push integer\n", line_number);
+	exit(EXIT_FAILURE);
 }
 
 
