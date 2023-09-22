@@ -1,7 +1,3 @@
-# 0x19. C - Stacks, Queues - LIFO, FIFO
-*This README will be updated as I progress in the project*
-
-
 # Monty ByteCode Interpreter Documentation
 
 ## Introduction
