@@ -50,3 +50,21 @@ void tokenize(char *line, unsigned int line_number)
 		token = strtok(NULL, " \t\n");
 	}
 }
+
+
+/**
+ * cleanup - frees the stack
+ */
+void cleanup(void)
+{
+	stack_t *temp;
+
+	temp = stack;
+
+	while (stack)
+	{
+		temp = stack;
+		stack = stack->next;
+		free(temp);
+	}
+}

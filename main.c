@@ -21,6 +21,8 @@ int main(int argc, char *argv[])
 
 	read_file(file_path);
 
+	atexit(cleanup);
+
 	return (EXIT_SUCCESS);
 }
 
