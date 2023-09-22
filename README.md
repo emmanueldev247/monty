@@ -11,7 +11,7 @@ The Monty ByteCode Interpreter is a program that executes Monty ByteCode files. 
 ## Usage
 
 To run the Monty ByteCode Interpreter, use the following command:
-` $ ./monty <file>` \
+` $ ./monty <file>`
 
 
 - `<file>`: The path to a Monty ByteCode file containing a sequence of Monty instructions.
@@ -50,12 +50,12 @@ Monty ByteCode files should adhere to the following format:
 
 Example Monty ByteCode file:
 * Push integers onto the stack
-`push 10`
-`push 20`
+<br>    `push 10` <br>
+    `push 20`
 
 * Perform arithmetic operations
-`add`
-`pall`
+<br>    `add`<br>
+    `pall`
 
 
 
