@@ -1,4 +1,5 @@
 #include "monty.h"
+#include <stdio.h>
 
 
 /**
@@ -10,10 +11,7 @@
  */
 int main(int argc, char *argv[])
 {
-	int line_number = 0;
-	char *file_path = argv[1];
-	FILE *file = fopen(file_path, "r");
-	char line[256];
+	const char *file_path = argv[1];
 
 	if (argc != 2)
 	{
@@ -21,20 +19,35 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	if (file == NULL)
+	read_file(file_path);
+
+	return (EXIT_SUCCESS);
+}
+
+/**
+  *read_file - function to open and read the Monty ByteCode file
+  * @file_path: file to be read
+  */
+void read_file(const char *file_path)
+{
+	FILE *file = fopen(file_path, "r");
+	char *line = NULL;
+	size_t len = 0;
+	unsigned int line_number = 0;
+
+	if (!file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", file_path);
 		exit(EXIT_FAILURE);
 	}
 
-
-	while (fgets(line, sizeof(line), file) != NULL)
+	while (getline(&line, &len, file) != -1)
 	{
 		line_number++;
 		tokenize(line, line_number);
 	}
 
 	fclose(file);
-
-	return (0);
+	if (line != NULL)
+		free(line);
 }
