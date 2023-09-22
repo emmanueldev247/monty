@@ -38,7 +38,7 @@ typedef struct instruction_s
 
 void read_file(const char *file_path);
 void tokenize(char *line, unsigned int line_number);
-void exec_opcodes(stack_t *stack, char * token, unsigned int line_number);
+void exec_opcodes(stack_t *stack, char *token, unsigned int line_number);
 void cleanup(void);
 
 void push(stack_t **stack, int value);
@@ -54,5 +54,10 @@ void mul(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
 
 void push_error(unsigned int line_number);
+void pchar(stack_t **stack, unsigned int line_number);
+void pstr(stack_t **stack);
+void rotl(stack_t **stack);
+void rotr(stack_t **stack);
+
 
 #endif

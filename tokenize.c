@@ -12,6 +12,9 @@ void tokenize(char *line, unsigned int line_number)
 	int value;
 	char *endptr, *token = strtok(line, " \t\n");
 
+	if (line[0] == '#')
+		return;
+
 	while (token != NULL)
 	{
 		if (strcmp(token, "push") == 0)
@@ -41,6 +44,14 @@ void tokenize(char *line, unsigned int line_number)
 			mul(&stack, line_number);
 		else if (strcmp(token, "mod") == 0)
 			mod(&stack, line_number);
+		else if (strcmp(token, "pchar") == 0)
+			pchar(&stack, line_number);
+		else if (strcmp(token, "pstr") == 0)
+			pstr(&stack);
+		else if (strcmp(token, "rotl") == 0)
+			rotl(&stack);
+		else if (strcmp(token, "rotr") == 0)
+			rotr(&stack);
 		else if (strcmp(token, "nop") == 0)
 			nop(&stack, line_number);
 		else
