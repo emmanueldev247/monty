@@ -37,6 +37,8 @@ void tokenize(char *line, unsigned int line_number)
 			sub(&stack, line_number);
 		else if (strcmp(token, "div") == 0)
 			my_div(&stack, line_number);
+		else if (strcmp(token, "mul") == 0)
+			mul(&stack, line_number);
 		else if (strcmp(token, "nop") == 0)
 			nop(&stack, line_number);
 		else
