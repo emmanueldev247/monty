@@ -8,8 +8,6 @@
  */
 void tokenize(char *line, stack_t **stack, unsigned int line_number)
 {
-	int value;
-	char *endptr;
 	unsigned int i = 0;
 	char *token = strtok(line, " \t\n");
 	instruction_t opcodes[] = {

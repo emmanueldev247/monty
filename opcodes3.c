@@ -74,6 +74,7 @@ void pchar(stack_t **stack, unsigned int line_number)
 void pstr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
+	(void)line_number;
 
 	while (current && current->n != 0 && (current->n >= 0 && current->n <= 127))
 	{
@@ -93,6 +94,7 @@ void pstr(stack_t **stack, unsigned int line_number)
 void rotl(stack_t **stack, unsigned int line_number)
 {
 	stack_t *first, *second, *current;
+	(void)line_number;
 
 	if (*stack == NULL || (*stack)->next == NULL)
 		return;
@@ -120,6 +122,8 @@ void rotl(stack_t **stack, unsigned int line_number)
 void rotr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current;
+	(void)line_number;
+
 
 	if (*stack == NULL || (*stack)->next == NULL)
 		return;
