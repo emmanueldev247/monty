@@ -35,14 +35,33 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct bus_s - variables -args, file, line content
+ * @arg: value
+ * @file: pointer to monty file
+ * @line: line content
+ * @lifi: flag change stack <-> queue
+ * Description: carries values through the program
+ */
+typedef struct bus_s
+{
+	char *arg;
+	FILE *file;
+	char *line;
+	int lifi;
+}  bus_t;
 
-void read_file(const char *file_path);
-void tokenize(char *line, unsigned int line_number);
+extern bus_t bus;
+
+/** core functions **/
+void read_file(const char *file_path, stack_t *stack);
+void tokenize(char *line, stack_t **stack, unsigned int line_number);
 void exec_opcodes(stack_t *stack, char *token, unsigned int line_number);
-void cleanup(void);
+void free_stack(stack_t *stack);
 
-void push(stack_t **stack, int value);
-void pall(stack_t **stack);
+/** opcode main functions **/
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
@@ -52,12 +71,17 @@ void sub(stack_t **stack, unsigned int line_number);
 void my_div(stack_t **stack, unsigned int line_number);
 void mul(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
-
-void push_error(unsigned int line_number);
+void queue(stack_t **head, unsigned int line_number);
+void my_stack(stack_t **head, unsigned int counter);
 void pchar(stack_t **stack, unsigned int line_number);
-void pstr(stack_t **stack);
-void rotl(stack_t **stack);
-void rotr(stack_t **stack);
+void pstr(stack_t **stack, unsigned int line_number);
+void rotl(stack_t **stack, unsigned int line_number);
+void rotr(stack_t **stack, unsigned int line_number);
+
+
+/** opcode helper functions **/
+void addqueue(stack_t **head, int n);
+void addnode(stack_t **head, int n);
 
 
 #endif
